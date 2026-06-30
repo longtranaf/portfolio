@@ -7,21 +7,21 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Hieu Nguyen — Portfolio',
+      title: 'Tran Long — Portfolio',
       htmlAttrs: { lang: 'en' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
-          content: 'Hieu Nguyen — Software engineer building thoughtful web experiences.'
+          content: 'Tran Long — Software engineer building thoughtful web experiences.'
         },
         // Open Graph
-        { property: 'og:title', content: 'Hieu Nguyen — Portfolio' },
+        { property: 'og:title', content: 'Tran Long — Portfolio' },
         { property: 'og:type', content: 'website' },
         {
           property: 'og:description',
-          content: 'Software engineer building thoughtful web experiences.'
+          content: 'Tran Long — Software engineer building thoughtful web experiences.'
         }
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
