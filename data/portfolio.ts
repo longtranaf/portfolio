@@ -7,10 +7,10 @@ export const profile = {
   intro:
     'I’m a software engineer who enjoys turning complex problems into clean, intuitive products. I care about performance, developer experience, and the small details that make software feel great to use.',
   location: 'Remote',
-  email: 'hieu.nguyen.202510@openreach.tech',
+  email: 'longtd1999@gmail.com',
   resumeUrl: '#', // link to a PDF in /public, e.g. '/resume.pdf'
   socials: [
-    { label: 'GitHub', url: 'https://github.com/' },
+    { label: 'GitHub', url: 'https://github.com/longtranaf' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/' },
     { label: 'Twitter', url: 'https://twitter.com/' }
   ]
@@ -19,13 +19,13 @@ export const profile = {
 export interface Project {
   title: string
   description: string
-  tags: string[]
+  tags: Array<string>
   link?: string
   repo?: string
   year: string
 }
 
-export const projects: Project[] = [
+export const projects: Array<Project> = [
   {
     title: 'Realtime Analytics Dashboard',
     description:
@@ -65,17 +65,13 @@ export const projects: Project[] = [
 
 export interface SkillGroup {
   category: string
-  items: string[]
+  items: Array<string>
 }
 
-export const skills: SkillGroup[] = [
+export const skills: Array<SkillGroup> = [
   {
     category: 'Frontend',
-    items: ['Vue 3', 'Nuxt 3', 'TypeScript', 'React', 'Tailwind CSS', 'Vite']
-  },
-  {
-    category: 'Backend',
-    items: ['Node.js', 'Nitro', 'PostgreSQL', 'Redis', 'REST', 'GraphQL']
+    items: ['Vue 3', 'Nuxt 3', 'TypeScript', 'React Native', 'Tailwind CSS', 'Vite']
   },
   {
     category: 'Tooling & Cloud',
@@ -90,7 +86,7 @@ export interface ExperienceItem {
   description: string
 }
 
-export const experience: ExperienceItem[] = [
+export const experience: Array<ExperienceItem> = [
   {
     role: 'Senior Software Engineer',
     company: 'Acme Corp',
