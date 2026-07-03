@@ -5,21 +5,40 @@ import { profile } from '~/data/portfolio'
 <template>
   <section id="top" class="hero">
     <div class="container inner">
-      <p class="eyebrow reveal">Hi, my name is</p>
+      <p class="eyebrow reveal">
+        Hi, my name is
+      </p>
+
       <h1 class="title reveal">
-        {{ profile.name }}<span class="dot">.</span>
+
+        {{ profile.name }}
+        
+        <span class="dot">.</span>
       </h1>
-      <h2 class="subtitle gradient-text reveal">{{ profile.role }}</h2>
-      <p class="lede reveal">{{ profile.tagline }}</p>
+
+      <h2 class="subtitle gradient-text reveal">
+        {{ profile.role }}
+      </h2>
+
+      <p class="lede reveal">
+        {{ profile.tagline }}
+      </p>
 
       <div class="actions reveal">
-        <a href="#projects" class="btn btn-primary">View my work</a>
-        <a :href="`mailto:${profile.email}`" class="btn btn-ghost">Get in touch</a>
+        <a href="#projects" class="btn btn-primary">
+          View my work
+        </a>
+
+        <a :href="`mailto:${profile.email}`" class="btn btn-ghost">
+          Get in touch
+        </a>
       </div>
 
       <ul class="socials reveal">
         <li v-for="s in profile.socials" :key="s.label">
-          <a :href="s.url" target="_blank" rel="noopener">{{ s.label }}</a>
+          <a :href="s.url" target="_blank" rel="noopener">
+            {{ s.label }}
+          </a>
         </li>
       </ul>
     </div>

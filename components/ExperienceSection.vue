@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { experience } from '~/data/portfolio'
+import { 
+  experience,
+} from '~/data/portfolio'
 </script>
 
 <template>
@@ -21,7 +23,9 @@ import { experience } from '~/data/portfolio'
               </h3>
               <span class="period">{{ item.period }}</span>
             </div>
-            <p class="desc">{{ item.description }}</p>
+            <p class="desc" v-for="(description, index) in item.descriptions" :key="index">
+              {{ description }}
+            </p>
           </div>
         </li>
       </ol>
@@ -33,6 +37,7 @@ import { experience } from '~/data/portfolio'
 .timeline {
   position: relative;
   padding-left: 28px;
+  list-style: none;
 }
 
 .timeline::before {

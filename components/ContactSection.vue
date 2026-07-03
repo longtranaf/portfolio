@@ -5,17 +5,27 @@ import { profile } from '~/data/portfolio'
 <template>
   <section id="contact" class="section">
     <div class="container inner reveal">
-      <p class="eyebrow">05 — Contact</p>
-      <h2 class="section-title">Let’s build something</h2>
+      <p class="eyebrow">
+        05 — Contact
+      </p>
+
+      <h2 class="section-title">
+        Let’s build something
+      </h2>
+
       <p class="lede">
         I’m always open to interesting projects and conversations. Whether you have
         a question or just want to say hi, my inbox is open.
       </p>
-      <a :href="`mailto:${profile.email}`" class="btn btn-primary big">Say hello</a>
+      <a :href="`mailto:${profile.email}`" class="btn btn-primary big">
+        Say hello
+      </a>
 
       <ul class="socials">
         <li v-for="s in profile.socials" :key="s.label">
-          <a :href="s.url" target="_blank" rel="noopener">{{ s.label }}</a>
+          <a :href="s.url" target="_blank" rel="noopener">
+            {{ s.label }}
+          </a>
         </li>
       </ul>
     </div>

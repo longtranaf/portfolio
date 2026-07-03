@@ -8,9 +8,13 @@ import { profile } from '~/data/portfolio'
       <div class="text reveal">
         <div class="section-head">
           <p class="eyebrow">01 — About</p>
+
           <h2 class="section-title">A bit about me</h2>
         </div>
-        <p class="para">{{ profile.intro }}</p>
+        <p class="para">
+          {{ profile.intro }}
+        </p>
+
         <p class="para">
           When I’m not shipping, I’m usually exploring new tools, contributing to
           open source, or refining my craft. I believe great software comes from
@@ -19,26 +23,45 @@ import { profile } from '~/data/portfolio'
 
         <div class="facts">
           <div class="fact">
-            <span class="num gradient-text">5+</span>
+            <span class="num gradient-text">3+</span>
+
             <span class="label">Years building</span>
           </div>
+
           <div class="fact">
-            <span class="num gradient-text">30+</span>
+            <span class="num gradient-text">15+</span>
+
             <span class="label">Projects shipped</span>
           </div>
+
           <div class="fact">
             <span class="num gradient-text">∞</span>
+
             <span class="label">Curiosity</span>
           </div>
         </div>
       </div>
 
       <div class="card reveal">
-        <div class="avatar">{{ profile.name.split(' ').map(n => n[0]).join('') }}</div>
-        <h3>{{ profile.name }}</h3>
-        <p class="role">{{ profile.role }}</p>
-        <p class="loc">📍 {{ profile.location }}</p>
-        <a :href="profile.resumeUrl" class="btn btn-ghost resume">Download résumé</a>
+        <div class="avatar">
+          {{ profile.name.split(' ').map(n => n[0]).join('') }}
+        </div>
+
+        <h3>
+          {{ profile.name }}
+        </h3>
+
+        <p class="role">
+          {{ profile.role }}
+        </p>
+
+        <p class="loc">
+          📍 {{ profile.location }}
+        </p>
+
+        <a :href="profile.resumeUrl" class="btn btn-ghost resume">
+          Download résumé
+        </a>
       </div>
     </div>
   </section>
@@ -48,20 +71,20 @@ import { profile } from '~/data/portfolio'
 .grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
-  gap: 48px;
+  gap: 3rem;
   align-items: start;
 }
 
 .para {
   color: var(--text-muted);
-  margin-bottom: 18px;
+  margin-bottom: 1.125rem;
   max-width: 60ch;
 }
 
 .facts {
   display: flex;
-  gap: 36px;
-  margin-top: 28px;
+  gap: 2.25rem;
+  margin-top: 1.75rem;
 }
 
 .fact {
@@ -78,25 +101,25 @@ import { profile } from '~/data/portfolio'
 .label {
   font-size: 0.85rem;
   color: var(--text-dim);
-  margin-top: 6px;
+  margin-top: 0.375rem;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 32px;
+  padding: 2rem;
   text-align: center;
   box-shadow: var(--shadow);
   position: sticky;
-  top: calc(var(--header-h) + 24px);
+  top: calc(var(--header-h) + 1.5rem);
 }
 
 .avatar {
-  width: 92px;
-  height: 92px;
+  width: 5.75rem;
+  height: 5.75rem;
   border-radius: 50%;
-  margin: 0 auto 18px;
+  margin: 0 auto 1.125rem;
   display: grid;
   place-items: center;
   font-size: 1.8rem;
@@ -112,20 +135,20 @@ import { profile } from '~/data/portfolio'
 .role {
   color: var(--accent);
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: 0.25rem;
 }
 
 .loc {
   color: var(--text-dim);
   font-size: 0.9rem;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .resume {
-  margin-top: 22px;
+  margin-top: 1.375rem;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 51.25rem) {
   .grid {
     grid-template-columns: 1fr;
   }
