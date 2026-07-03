@@ -6,6 +6,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   app: {
+    baseURL: '/portfolio/',
+    buildAssetsDir: 'assets',
     head: {
       title: 'Tran Long — Portfolio',
       htmlAttrs: { lang: 'en' },
@@ -26,5 +28,8 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
     }
-  }
+  },
+  nitro: {
+    preset: 'github-pages',
+  },
 })
