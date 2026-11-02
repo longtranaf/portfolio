@@ -1,25 +1,37 @@
 /* ---------- Design tokens ---------- */
 :root {
-  --bg: #0b0f17;
-  --bg-soft: #111827;
-  --surface: #151c2c;
-  --surface-2: #1c2538;
-  --border: #243049;
-  --text: #e6edf6;
-  --text-muted: #9aa6bd;
-  --text-dim: #6b7689;
-  --accent: #7c9cff;
-  --accent-2: #b07cff;
-  --accent-3: #4fd1c5;
-  --gradient: linear-gradient(120deg, var(--accent), var(--accent-2));
-  --shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --maxw: 1080px;
-  --header-h: 68px;
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
+  --bg: #070b18;
+  --white: #fff;
+  --text: #e2e8f0;
+  --text-soft: #cbd5e1;
+  --text-muted: #b6c0d4;
+  --text-dim: #a5b0c4;
+  --line: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.14);
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-2: rgba(255, 255, 255, 0.08);
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --accent-3: #f472b6;
+  --on-accent: #04111f;
+  --glass-blur: blur(1.25rem) saturate(150%);
+  --glass-highlight: inset 0 0.0625rem 0 rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 0.5rem 2rem rgba(2, 6, 23, 0.35);
+  --gutter: clamp(1rem, 4vw, 1.5rem);
+  --radius: 1.5rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2rem;
+  --maxw: 75rem;
+  --header-h: 4.25rem;
+  --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --display: 'Sora', var(--font);
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Sora has no Vietnamese glyphs */
+:root:lang(vi) {
+  --display: 'Be Vietnam Pro', var(--font);
 }
 
 /* ---------- Reset ---------- */
@@ -33,7 +45,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + 16px);
+  scroll-padding-top: calc(var(--header-h) + 2rem);
 }
 
 body {
@@ -44,18 +56,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-}
-
-/* Subtle ambient background glow */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(60vw 60vw at 80% -10%, rgba(124, 156, 255, 0.12), transparent 60%),
-    radial-gradient(50vw 50vw at -10% 20%, rgba(176, 124, 255, 0.1), transparent 60%);
-  pointer-events: none;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -68,8 +69,14 @@ img {
   display: block;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
+}
+
+:focus-visible {
+  outline: 0.125rem solid var(--accent);
+  outline-offset: 0.1875rem;
 }
 
 /* ---------- Layout helpers ---------- */
@@ -77,87 +84,109 @@ ul {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: var(--gutter);
 }
 
 .section {
-  padding-block: 96px;
+  padding-block: clamp(2.5rem, 7vw, 3.75rem);
 }
 
 .section-head {
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.875rem;
   color: var(--accent);
-  margin-bottom: 12px;
 }
 
 .section-title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--white);
 }
 
-.section-subtitle {
-  color: var(--text-muted);
-  margin-top: 14px;
-  max-width: 60ch;
+/* ---------- Glass panels ---------- */
+.glass {
+  background: var(--surface);
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-highlight);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+@supports not ((backdrop-filter: blur(0.0625rem)) or (-webkit-backdrop-filter: blur(0.0625rem))) {
+  .glass {
+    background: rgba(20, 26, 48, 0.92);
+  }
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999rem;
+  background: var(--surface-2);
+  border: 0.0625rem solid var(--border-soft);
+  font-size: 0.875rem;
+}
+
+/* ---------- Icons ---------- */
+.icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: 1px solid transparent;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  border-radius: 1rem;
+  border: 0.0625rem solid transparent;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
-    border-color 0.18s ease;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-0.125rem);
 }
 
 .btn-primary {
-  background: var(--gradient);
-  color: #0b0f17;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px -10px rgba(124, 156, 255, 0.6);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 0.625rem 1.875rem rgba(56, 189, 248, 0.3);
 }
 
 .btn-ghost {
-  background: transparent;
-  border-color: var(--border);
-  color: var(--text);
-}
-
-.btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
+  background: var(--surface-2);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
 /* ---------- Reveal on scroll ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(1.5rem);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
