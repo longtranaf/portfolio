@@ -6,10 +6,9 @@ useReveal()
 <template>
   <div>
     <HeroSection />
-    <AboutSection />
-    <ProjectsSection />
     <SkillsSection />
     <ExperienceSection />
+    <ProjectsSection />
     <ContactSection />
   </div>
 </template>

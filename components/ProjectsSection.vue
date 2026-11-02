@@ -1,52 +1,56 @@
 <script setup lang="ts">
-import { projects } from '~/data/portfolio'
+import { projects, ui } from '~/data/portfolio'
+
+const l = useLocalized()
+
+function initials(title: string) {
+  return title.split(' ').slice(0, 2).map((word) => word[0]).join('')
+}
+
+function domain(url: string) {
+  return url.replace(/^https?:\/\//, '')
+}
 </script>
 
 <template>
   <section id="projects" class="section">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">02 — Work</p>
-        <h2 class="section-title">Selected projects</h2>
-        <p class="section-subtitle">
-          A few things I’ve built recently. Each one taught me something new.
-        </p>
+        <p class="eyebrow">{{ l(ui.projects.eyebrow) }}</p>
+        <h2 class="section-title">{{ l(ui.projects.title) }}</h2>
       </div>
 
       <div class="grid">
         <article
           v-for="project in projects"
           :key="project.title"
-          class="project reveal"
+          class="project glass reveal"
         >
-          <div class="top">
-            <div class="folder" aria-hidden="true">▤</div>
-            <div class="links">
-              <a
-                v-if="project.repo"
-                :href="project.repo"
-                target="_blank"
-                rel="noopener"
-                aria-label="Source code"
-              >Code</a>
-              <a
-                v-if="project.link"
-                :href="project.link"
-                target="_blank"
-                rel="noopener"
-                aria-label="Live demo"
-              >Live ↗</a>
+          <div class="thumb" aria-hidden="true">{{ initials(project.title) }}</div>
+
+          <div class="body">
+            <div class="heading">
+              <h3 class="title">{{ project.title }}</h3>
+              <span class="year">{{ project.year }}</span>
             </div>
+            <p class="desc">{{ l(project.description) }}</p>
+
+            <ul class="tags">
+              <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
+            </ul>
+
+            <a
+              v-if="project.link"
+              :href="project.link"
+              target="_blank"
+              rel="noopener"
+              class="link"
+            >
+              {{ domain(project.link) }}
+              <AppIcon name="arrow-up-right" />
+            </a>
+            <span v-else class="private">{{ l(ui.projects.private) }}</span>
           </div>
-
-          <h3 class="title">{{ project.title }}</h3>
-          <p class="desc">{{ project.description }}</p>
-
-          <ul class="tags">
-            <li v-for="tag in project.tags" :key="tag">{{ tag }}</li>
-          </ul>
-
-          <span class="year">{{ project.year }}</span>
         </article>
       </div>
     </div>
@@ -56,89 +60,98 @@ import { projects } from '~/data/portfolio'
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 1.25rem;
 }
 
 .project {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 26px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 1.125rem;
+  padding: 1rem 1rem 1.75rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0.5rem 2rem rgba(2, 6, 23, 0.3), var(--glass-highlight);
 }
 
-.project:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
+.thumb {
+  height: 12.5rem;
+  border-radius: 1.125rem;
+  background: var(--surface);
+  border: 0.0625rem solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-dim);
 }
 
-.top {
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding-inline: 0.75rem;
+}
+
+.heading {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.folder {
-  font-size: 1.8rem;
-  color: var(--accent);
-}
-
-.links {
-  display: flex;
-  gap: 14px;
-}
-
-.links a {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  transition: color 0.18s ease;
-}
-
-.links a:hover {
-  color: var(--accent);
+  align-items: baseline;
+  gap: 0.75rem;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--display);
+  font-size: 1.375rem;
+  color: var(--white);
+}
+
+.year {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--text-dim);
 }
 
 .desc {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-top: 10px;
   flex: 1;
+  color: var(--text-soft);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
+  gap: 0.375rem;
 }
 
-.tags li {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--accent-3);
+.tag {
+  padding: 0.25rem 0.625rem;
+  border-radius: 999rem;
   background: var(--surface-2);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 999px;
+  border: 0.0625rem solid var(--border-soft);
+  font-size: 0.8125rem;
 }
 
-.year {
-  position: absolute;
-  top: 26px;
-  right: 26px;
-  display: none;
+.link,
+.private {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.link {
+  align-self: flex-start;
+  gap: 0.375rem;
+  font-weight: 700;
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+.private {
+  font-size: 0.875rem;
+  color: var(--text-dim);
 }
 </style>

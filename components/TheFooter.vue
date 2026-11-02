@@ -1,39 +1,40 @@
 <script setup lang="ts">
-import { profile } from '~/data/portfolio'
+import {
+  profile,
+  ui
+} from '~/data/portfolio'
+
 const year = new Date().getFullYear()
+const setLocale = useLocalized()
 </script>
 
 <template>
-  <footer class="footer">
-    <div class="container row">
-      <p>© {{ year }} {{ profile.name }}. Built with Nuxt 3.</p>
-      <a href="#top" class="top">Back to top ↑</a>
+  <footer class="footer container">
+    <div class="row">
+      <p>
+        © {{ year }} {{ profile.name }}
+      </p>
+
+      <p>
+        {{ setLocale(ui.footer.builtWith) }}
+      </p>
     </div>
   </footer>
 </template>
 
 <style scoped>
 .footer {
-  border-top: 1px solid var(--border);
-  padding-block: 28px;
+  padding-block: 1.25rem 3rem;
+  font-size: 0.875rem;
   color: var(--text-dim);
-  font-size: 0.85rem;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 0.75rem;
   justify-content: space-between;
-  align-items: center;
-}
-
-.top {
-  font-family: var(--mono);
-  transition: color 0.18s ease;
-}
-
-.top:hover {
-  color: var(--accent);
+  padding-top: 1.5rem;
+  border-top: 0.0625rem solid var(--line);
 }
 </style>
