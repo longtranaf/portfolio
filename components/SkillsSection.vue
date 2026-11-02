@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { skills } from '~/data/portfolio'
+import {
+  skills,
+  ui
+} from '~/data/portfolio'
+
+const l = useLocalized()
 </script>
 
 <template>
   <section id="skills" class="section">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">03 — Toolkit</p>
-        <h2 class="section-title">Skills &amp; tools</h2>
-        <p class="section-subtitle">
-          The technologies I reach for most often, grouped by where they fit.
-        </p>
+        <p class="eyebrow">{{ l(ui.skills.eyebrow) }}</p>
+        <h2 class="section-title">{{ l(ui.skills.title) }}</h2>
       </div>
 
       <div class="grid">
-        <div v-for="group in skills" :key="group.category" class="group reveal">
-          <h3 class="cat">{{ group.category }}</h3>
+        <div v-for="group in skills" :key="group.category.en" class="group glass reveal">
+          <h3 class="cat">{{ l(group.category) }}</h3>
           <ul class="items">
-            <li v-for="item in group.items" :key="item">
-              <span class="bullet">▹</span>{{ item }}
-            </li>
+            <li v-for="item in group.items" :key="item" class="chip">{{ item }}</li>
           </ul>
         </div>
       </div>
@@ -30,41 +30,26 @@ import { skills } from '~/data/portfolio'
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(16.25rem, 100%), 1fr));
+  gap: 1.25rem;
 }
 
 .group {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
 }
 
 .cat {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  font-family: var(--display);
+  font-size: 1.25rem;
+  color: var(--white);
 }
 
 .items {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.items li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.bullet {
-  color: var(--accent);
-  font-family: var(--mono);
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 </style>
