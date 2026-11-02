@@ -3,6 +3,7 @@
 .output
 .data
 dist
+.wrangler
 
 # Dependencies
 node_modules
